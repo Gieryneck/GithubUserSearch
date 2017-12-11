@@ -1,0 +1,16 @@
+{
+  "name": "gihubusersearch",
+  "version": "1.0.0",
+  "description": "edu",
+  "main": "\u001b[D\u001b[D\u001b[D\u001bscript.js)",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel script.js --watch --out-file build.js"
+  },
+  "keywords": [
+    "edu",
+    "api"
+  ],
+  "author": "Gieryn",
+  "license": "ISC"
+}
