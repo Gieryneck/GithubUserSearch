@@ -34,7 +34,7 @@ class App extends React.Component {
 
         // https://jakearchibald.com/2015/thats-so-fetch/
         fetch(url) 
-            .then(response => response.json())
+            .then(response => response.json()) 
             .then(responseJson => this.setState({users: responseJson.items}));
             
     }
@@ -55,9 +55,9 @@ class App extends React.Component {
                  event occurs immediately after the value of an element has changed, while 
                  onchange occurs when the element loses focus, after the content has been changed. 
             */
-            <div>
+            <div className="app-container">
                 <form onSubmit={event => this.onSubmit(event)}> 
-                    <label htmlFor="searchText">Search by user name</label>
+                    <label htmlFor="searchText">Search Github members by user name: </label>
                     <input 
                         type="text"
                         id="searchText"
@@ -65,7 +65,7 @@ class App extends React.Component {
                         value={this.state.searchText}
                     />
                 </form>
-                <UsersList users={this.state.users}/>
+                <UsersList users={this.state.users} />
             </div>
         )
     }
@@ -73,7 +73,33 @@ class App extends React.Component {
 
 
 
+class UsersList extends React.Component {
 
+    // getter - na odniesienie 'this.users' odpalona zostanie funkcja znajdujaca sie pod "get users()". odnosimy sie jak to propa, uruchamiamy metode.
+    get users() {
+      return this.props.users.map(user => <User key={user.id} user={user}/>);
+    }
+  
+    render() {
+      return (
+        <div>
+          {this.users}
+        </div>
+      );
+    }   
+  }
+
+
+  class User extends React.Component {
+    render() {
+      return (
+        <div className="user-container">
+          <img src={this.props.user.avatar_url} style={{maxWidth: '100px'}}/>
+          <a href={this.props.user.html_url} target="_blank">{this.props.user.login}</a>
+        </div> // avatar_url i html_url to to klucze w odpowiedzi API Githuba
+      );
+    }
+  }
 
 
 ReactDOM.render(<App />, document.getElementById('root'));

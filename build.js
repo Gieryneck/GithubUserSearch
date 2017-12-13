@@ -70,7 +70,7 @@ var App = function (_React$Component) {
                 */
                 React.createElement(
                     "div",
-                    null,
+                    { className: "app-container" },
                     React.createElement(
                         "form",
                         { onSubmit: function onSubmit(event) {
@@ -79,7 +79,7 @@ var App = function (_React$Component) {
                         React.createElement(
                             "label",
                             { htmlFor: "searchText" },
-                            "Search by user name"
+                            "Search Github members by user name: "
                         ),
                         React.createElement("input", {
                             type: "text",
@@ -97,6 +97,68 @@ var App = function (_React$Component) {
     }]);
 
     return App;
+}(React.Component);
+
+var UsersList = function (_React$Component2) {
+    _inherits(UsersList, _React$Component2);
+
+    function UsersList() {
+        _classCallCheck(this, UsersList);
+
+        return _possibleConstructorReturn(this, (UsersList.__proto__ || Object.getPrototypeOf(UsersList)).apply(this, arguments));
+    }
+
+    _createClass(UsersList, [{
+        key: "render",
+        value: function render() {
+            return React.createElement(
+                "div",
+                null,
+                this.users
+            );
+        }
+    }, {
+        key: "users",
+
+
+        // getter - na odniesienie 'this.users' odpalona zostanie funkcja znajdujaca sie pod "get users()". odnosimy sie jak to propa, uruchamiamy metode.
+        get: function get() {
+            return this.props.users.map(function (user) {
+                return React.createElement(User, { key: user.id, user: user });
+            });
+        }
+    }]);
+
+    return UsersList;
+}(React.Component);
+
+var User = function (_React$Component3) {
+    _inherits(User, _React$Component3);
+
+    function User() {
+        _classCallCheck(this, User);
+
+        return _possibleConstructorReturn(this, (User.__proto__ || Object.getPrototypeOf(User)).apply(this, arguments));
+    }
+
+    _createClass(User, [{
+        key: "render",
+        value: function render() {
+            return React.createElement(
+                "div",
+                { className: "user-container" },
+                React.createElement("img", { src: this.props.user.avatar_url, style: { maxWidth: '100px' } }),
+                React.createElement(
+                    "a",
+                    { href: this.props.user.html_url, target: "_blank" },
+                    this.props.user.login
+                )
+            ) // avatar_url i html_url to to klucze w odpowiedzi API Githuba
+            ;
+        }
+    }]);
+
+    return User;
 }(React.Component);
 
 ReactDOM.render(React.createElement(App, null), document.getElementById('root'));
